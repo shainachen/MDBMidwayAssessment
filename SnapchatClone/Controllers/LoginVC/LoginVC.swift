@@ -51,9 +51,19 @@ class LoginVC: UIViewController {
     }
     
     func handleLogin() {
-        var email = "wubba@lubbadubdub.com"
-        var password = "ImMrMeeseeks"
+        var email = ""
+        var password = ""
         /* PART 1A START*/
+        email = emailTextField.text!
+        if email == "" {
+            self.displayAlert(title: "Missing/Invalid email", message: "Enter an email.")
+            return
+        }
+        password = passwordTextField.text!
+        if password == "" {
+            self.displayAlert(title: "Missing/Invalid password", message: "Enter a password.")
+            return
+        }
         
         /* PART 1A FINISH*/
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
@@ -72,11 +82,31 @@ class LoginVC: UIViewController {
     }
     
     func handleRegister() {
-        var name = "Rick Morty"
-        var number = "6969696969"
-        var email = "wubba@lubbadubdub.com"
-        var password = "ImMrMeeseeks"
+        var name = ""
+        var number = ""
+        var email = ""
+        var password = ""
         /* PART 1B START*/
+        name = nameTextField.text!
+        if name == "" {
+            self.displayAlert(title: "Missing email", message: "Enter your name.")
+            return
+        }
+        number = phoneNumberTextField.text!
+        if number == "" {
+            self.displayAlert(title: "Missing phone number", message: "Enter your phone number.")
+            return
+        }
+        email = emailTextField.text!
+        if email == "" {
+            self.displayAlert(title: "Missing email", message: "Enter a valid email.")
+            return
+        }
+        password = passwordTextField.text!
+        if password == "" {
+            self.displayAlert(title: "Missing password", message: "Enter your password.")
+            return
+        }
         
         /* PART 1B FINISH*/
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -129,7 +159,9 @@ class LoginVC: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         /* PART 1C START*/
-        
+        if let feedview = segue.destination as? FeedVC {
+            feedview.userID = ourUserID
+        }
         /* PART 1C FINISH*/
     }
 }

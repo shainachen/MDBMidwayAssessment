@@ -23,7 +23,7 @@ class ShowImageVC: UIViewController {
     }
     
     @objc func done() {
-        performSegue(withIdentifier: "toFeedFromShowImage", sender: self)
+        self.navigationController?.popViewController(animated: true)
     }
  
 

@@ -28,6 +28,7 @@ class FeedVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
         navigationItem.title = "My Snaps"
     }
     
@@ -53,7 +54,19 @@ class FeedVC: UIViewController {
     
     func setupTableView() {
         /* PART 2A START */
-    
+        let centerx = view.frame.width/2;
+        let centery = view.frame.height/2;
+        
+        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: centerx*2, height: centery*2 - 25))
+        
+        tableView.center = CGPoint.init(x: centerx, y: centery)
+        
+        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "feedCell")
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        self.view.addSubview(tableView)
         /* PART 2A FINISH */
     }
     
